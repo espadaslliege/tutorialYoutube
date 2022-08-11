@@ -1,7 +1,7 @@
 from odoo import models, fields
 
 class Course(models.Model):
-    _name = 'openacademy.couse'
+    _name = 'openacademy.course'
     _description = 'Courses'
 
     name = fields.Char(string='Course Name', required=True)
