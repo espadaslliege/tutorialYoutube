@@ -26,5 +26,17 @@
                 </field>
             </field>
         </record>
+        <record id="product_template_search_view_od_sales" model="ir.ui.view">
+            <field name="name">product.template.search.od.sales</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+                <filter name="filter_to_purchase" position="before">
+                    <separator/>
+                    <filter string="Low Price products" name="filter_low_price_products" domain="[('list_price','&lt;=',50)]"/>
+                </filter>
+            </field>
+        </record>
+
     </data>
 </odoo>
