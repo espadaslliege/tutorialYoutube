@@ -76,13 +76,17 @@
                             <field name="course_id"/>
                             <field name="name"/>
                             <field name="instructor_id"/>
+                            <field name="country_id"/>
                         </group>
                         <group string="Schedule">
                             <field name="start_date"/>
                             <field name="duration"/>
                             <field name="seats"/>
+<!--                            <field name="attendee_ids" widget="many2many_tags"/>-->
                         </group>
                     </group>
+                    <label for="attendee_ids"/>
+                    <field name="attendee_ids" domain="[('country_id','=', country_id)]"/>
                 </sheet>
             </form>
         </field>
