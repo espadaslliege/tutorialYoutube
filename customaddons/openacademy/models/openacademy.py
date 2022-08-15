@@ -1,4 +1,7 @@
-from odoo import models, fields
+from odoo import models, fields, api
+
+
+
 
 class Course(models.Model):
     _name = 'openacademy.course'
@@ -7,6 +10,14 @@ class Course(models.Model):
     name = fields.Char(string='Course Name', required=True)
     description = fields.Text('description', help='Add course description')
     responsible_id = fields.Many2one('res.users', ondelete='set null', string="Responsible", index=True)
+    taken_seats = fields.Float(string="Taken seats", compute='_taken_seats')
+
+    def _taken_sets(self):
+        for r in self:
+            if not r.seats:
+                r.taken_seats = 0.0
+            else:
+                r.taken_seats = 100.0 * len(r.attendee_ids) / r.seats
 
 
 class Session(models.Model):
@@ -21,3 +32,12 @@ class Session(models.Model):
     country_id = fields.Many2one('res.country', related='instructor_id.country_id')
     course_id = fields.Many2one('openacademy.course', ondelete='cascade', string="Course", required=True)
     attendee_ids = fields.Many2many('res.partner', string="Attendees")
+    taken_seats = fields.Float('Taken seats', compute='_taken_seats')
+
+    @api.depends('seats')
+    def _taken_seats(self):
+        for r in self:
+            if not r.seats:
+                r.taken_seats = 0.0
+            else:
+                r.taken_seats = 100.0 * len(r.attendee_ids) / r.seats
