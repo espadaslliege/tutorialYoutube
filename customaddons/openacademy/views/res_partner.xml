@@ -13,13 +13,13 @@
                     </group>
                 </page>
             </xpath>
-<!--            <notebook position="inside">-->
-<!--                <page string="Sessions">-->
-<!--                    <group>-->
+            <notebook position="inside">
+                <page string="Sessions">
+                    <group>
 
-<!--                    </group>-->
-<!--                </page>-->
-<!--            </notebook>-->
+                    </group>
+                </page>
+            </notebook>
         </field>
     </record>
 </odoo>

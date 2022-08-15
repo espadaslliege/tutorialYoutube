@@ -25,7 +25,7 @@ class Session(models.Model):
     _description = "Open Academy Sessions"
 
     name = fields.Char(required=True)
-    start_date = fields.Date()
+    start_date = fields.Date(default=fields.date.today())
     duration = fields.Float(digits=(6, 2), help="Duration in days")
     seats = fields.Integer(string="Number of seats")
     instructor_id = fields.Many2one('res.partner', string="Instructor", domain=[('country_id', '=', 'Belgium')])
@@ -33,6 +33,7 @@ class Session(models.Model):
     course_id = fields.Many2one('openacademy.course', ondelete='cascade', string="Course", required=True)
     attendee_ids = fields.Many2many('res.partner', string="Attendees")
     taken_seats = fields.Float('Taken seats', compute='_taken_seats')
+    active = fields.Boolean(string='Active', default=True)
 
     @api.depends('seats')
     def _taken_seats(self):
