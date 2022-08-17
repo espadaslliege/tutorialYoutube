@@ -45,6 +45,13 @@
             <search>
                 <field name="name"/>
                 <field name="description"/>
+                <filter name="my_courses" string="My Courses"
+                        domain="[('responsible_id', '=', uid)]"/>
+                <group string="Group By">
+                    <filter name="by_responsible" string="Responsible"
+                            context="{'group_by': 'responsible_id'}"/>
+                </group>
+
             </search>
         </field>
     </record>
@@ -52,6 +59,7 @@
     <record model="ir.actions.act_window" id="course_list_action">
         <field name="name">Courses</field>
         <field name="res_model">openacademy.course</field>
+        <field name="context" eval="{'search_default_by_responsible': 1, 'search_default_my_courses': 1}"/>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Create the first course
