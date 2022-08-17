@@ -75,6 +75,9 @@ class Session(models.Model):
         for r in self:
             if not (r.start_date and r.end_date):
                 continue
+            #Compute the difference between dates. but: Friday - Monday = 4 days
+            #so add one day to get 5 days instead
+            r.duration = (r.end_date - r.start_date).days + 1
 
     @api.constrains('instructor_id', 'attendee_ids')
     def _check_instructor_not_in_attendees(self):
