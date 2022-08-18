@@ -22,7 +22,9 @@
                 <sheet>
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only" string="Course name"/>
-                        <h1><field name="name"/></h1>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
                     </div>
                     <group>
                         <group>
@@ -70,7 +72,7 @@
     <menuitem id="main_openacademy_menu" name="Open Academy"/>
     <menuitem id="openacademy_menu" name="Open Academy" parent="main_openacademy_menu"/>
     <menuitem id="courses_menu" name="Courses" parent="openacademy_menu"
-            action="course_list_action"/>
+              action="course_list_action"/>
 
     <record model="ir.ui.view" id="session_form_view">
         <field name="name">session.form</field>
@@ -193,5 +195,31 @@
             </kanban>
         </field>
     </record>
+
+    <record model="ir.ui.view" id="wizard_form_view">
+        <field name="name">wizard.form</field>
+        <field name="model">openacademy.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Add Attendees">
+                <group>
+                    <field name="session_ids"/>
+                    <field name="attendee_ids"/>
+                </group>
+                <footer>
+                    <button name="subscribe" type="object"
+                            string="Subscribe" class="oe_highlight"/>
+                    or
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="launch_session_wizard"
+                name="Add Attendees"
+                binding_model="openacademy.session"
+                res_model="openacademy.wizard"
+                view_mode="form"
+                target="new"/>
 
 </odoo>
