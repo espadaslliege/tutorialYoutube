@@ -59,6 +59,7 @@ class Session(models.Model):
     taken_seats = fields.Float('Taken seats', compute='_taken_seats')
     active = fields.Boolean(string='Active', default=True)
     attendees_count = fields.Integer(string="Attendees count", compute='_get_attendees_count', store=True)
+    color = fields.Integer()
 
     @api.depends('attendee_ids')
     def _get_attendees_count(self):
