@@ -5,11 +5,12 @@ from odoo.exceptions import ValidationError
 
 class Course(models.Model):
     _name = 'openacademy.course'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Courses'
 
-    name = fields.Char(string='Course Name', required=True)
+    name = fields.Char(string='Course Name', required=True, traking=True)
     description = fields.Text('description', help='Add course description')
-    responsible_id = fields.Many2one('res.users', ondelete='set null', string="Responsible", index=True)
+    responsible_id = fields.Many2one('res.users', ondelete='set null', string="Responsible", index=True, traking=True)
     taken_seats = fields.Float(string="Taken seats", compute='_taken_seats')
 
     def copy(self, default=None):
