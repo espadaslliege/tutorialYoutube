@@ -1,0 +1,62 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* od_sales
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-16 17:19+0000\n"
+"PO-Revision-Date: 2022-08-16 17:19+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: od_sales
+#: model:ir.model.fields,field_description:od_sales.field_product_product__computer_generation
+#: model:ir.model.fields,field_description:od_sales.field_product_template__computer_generation
+msgid "Computer Generation"
+msgstr "Geração do computador"
+
+#. module: od_sales
+#: model_terms:ir.actions.act_window,help:od_sales.product_template_action_service_products
+msgid "Create a new  serviceproduct"
+msgstr ""
+
+#. module: od_sales
+#: model_terms:ir.ui.view,arch_db:od_sales.product_template_search_view_od_sales
+msgid "Low Price products"
+msgstr ""
+
+#. module: od_sales
+#: model:ir.model,name:od_sales.model_product_template
+msgid "Product Template"
+msgstr "Modelo de Produto"
+
+#. module: od_sales
+#: model:ir.actions.act_window,name:od_sales.product_template_action_service_products
+#: model:ir.ui.menu,name:od_sales.menu_product_template_action_od_sales
+msgid "Service Products"
+msgstr "Produtos de Serviço"
+
+#. module: od_sales
+#: model:ir.model.fields,field_description:od_sales.field_product_product__warranty_end_date
+#: model:ir.model.fields,field_description:od_sales.field_product_template__warranty_end_date
+msgid "Warranty End"
+msgstr ""
+
+#. module: od_sales
+#: model:ir.model.fields,field_description:od_sales.field_product_product__warranty_start_date
+#: model:ir.model.fields,field_description:od_sales.field_product_template__warranty_start_date
+msgid "Warranty start"
+msgstr ""
+
+#. module: od_sales
+#: model_terms:ir.actions.act_window,help:od_sales.product_template_action_service_products
+msgid ""
+"You must define a product for everything you sell or purchase,\n"
+"                    whether it's a storable product, a consumable or a service."
+msgstr ""
