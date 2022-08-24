@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_students_tree" model="ir.ui.view">
+        <field name="name">view.students.tree</field>
+        <field name="model">students.school</field>
+        <field name="arch" type="xml">
+            <tree string="students_tree">
+                <field name="name"/>
+                <field name="rg"/>
+                <field name="responsible"/>
+                <field name="serie"/>
+                <field name="city"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="students_view_form" model="ir.ui.view">
+        <field name="name">view_form_students</field>
+        <field name="model">students.school</field>
+        <field name="arch" type="xml">
+            <form string="students_form">
+                <sheet>
+                    <div>
+                        <label for="name" class="oe_edit_only" string="Student"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="rg"/>
+                        <field name="responsible"/>
+                        <field name="serie"/>
+                        <field name="city"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="students_view_action" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">students.school</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create the first student
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="school_main_menu" name="School"/>
+    <menuitem id="school_menu" name="School" parent="school_main_menu"/>
+    <menuitem id="students_menu" name="Students" parent="school_menu" action="students_view_action"/>
+
+    <record id="courses_view_tree" model="ir.ui.view">
+        <field name="name">view_courses_tree</field>
+        <field name="model">course.school</field>
+        <field name="arch" type="xml">
+            <tree string="courses_tree">
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="courses_view_form" model="ir.ui.view">
+        <field name="name">view_courses_form</field>
+        <field name="model">course.school</field>
+        <field name="arch" type="xml">
+            <form string="_form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="courses_search_view" model="ir.ui.view">
+        <field name="name">course.search</field>
+        <field name="model">course.school</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="name" string="name" domain="[()]"/>
+                <field name="description" string="description" domain="[()]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="courses_view_action" model="ir.actions.act_window">
+        <field name="name">Courses</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">course.school</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="courses_menu" name="Courses" parent="school_menu" action="courses_view_action"/>
+
+    <record id="session_view_tree" model="ir.ui.view">
+        <field name="name">session_view_tree</field>
+        <field name="model">session.school</field>
+        <field name="arch" type="xml">
+            <tree string="session_tree">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="instructor_id"/>
+                <field name="course_id"/>
+                <field name="cidade"/>
+<!--                <field name="taken_seats"/>-->
+            </tree>
+        </field>
+    </record>
+
+    <record id="session_view_form" model="ir.ui.view">
+        <field name="name">session_view_form</field>
+        <field name="model">session.school</field>
+        <field name="arch" type="xml">
+            <form string="session_form">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="instructor_id"/>
+                            <field name="cidade"/>
+<!--                            <field name="seats"/>-->
+                        </group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="course_id"/>
+<!--                            <field name="taken_seats" widget="progressbar"/>-->
+                        </group>
+                    </group>
+                    <label for="attendee_ids"/>
+                    <field name="attendee_ids"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="session_view_action" model="ir.actions.act_window">
+        <field name="name">Sessions</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">session.school</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="session_menu" name="Sessions" parent="school_menu" action="session_view_action"/>
+
+</odoo>
