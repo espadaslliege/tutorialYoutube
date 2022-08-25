@@ -85,6 +85,12 @@
             <search string="">
                 <field name="name" string="name" domain="[()]"/>
                 <field name="description" string="description" domain="[()]"/>
+                <filter name="my_courses" string="My Courses"
+                        domain="[('responsible_id', '=', uid)]"/>
+                <group string="Group By">
+                    <filter name="by_responsible" string="Responsible"
+                            context="{'group_by': 'responsible_id'}"/>
+                </group>
             </search>
         </field>
     </record>
@@ -93,6 +99,7 @@
         <field name="name">Courses</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">course.school</field>
+        <field name="context" eval="{'search_default_by_responsible': 1, 'search_default_my_courses': 1}"/>
         <field name="view_mode">tree,form</field>
     </record>
 
@@ -103,15 +110,18 @@
         <field name="name">session_view_tree</field>
         <field name="model">session.school</field>
         <field name="arch" type="xml">
-            <tree string="session_tree">
+            <tree string="session_tree" decoration-bf="duration&lt;5" decoration-it="duration&gt;15">
                 <field name="name"/>
                 <field name="description"/>
                 <field name="start_date"/>
+                <field name="duration"/>
                 <field name="end_date"/>
                 <field name="instructor_id"/>
                 <field name="course_id"/>
                 <field name="cidade"/>
-<!--                <field name="taken_seats"/>-->
+                <field name="seats"/>
+                <field name="taken_seats"/>
+                <field name="active"/>
             </tree>
         </field>
     </record>
@@ -128,19 +138,41 @@
                             <field name="description"/>
                             <field name="instructor_id"/>
                             <field name="cidade"/>
-<!--                            <field name="seats"/>-->
+                            <field name="seats"/>
                         </group>
                         <group>
                             <field name="start_date"/>
                             <field name="end_date"/>
                             <field name="course_id"/>
-<!--                            <field name="taken_seats" widget="progressbar"/>-->
+                            <field name="taken_seats" widget="progressbar"/>
+                            <field name="duration"/>
                         </group>
                     </group>
                     <label for="attendee_ids"/>
-                    <field name="attendee_ids"/>
+                    <field name="attendee_ids" domain="[('city', '=', cidade)]"/>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="session_calendar_view">
+        <field name="name">session.calendar</field>
+        <field name="model">session.school</field>
+        <field name="arch" type="xml">
+            <calendar string="Session Calendar" date_start="start_date" date_stop="end_date" color="instructor_id">
+                <field name="name"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="school_session_graph_view">
+        <field name="name">school.session.graph</field>
+        <field name="model">session.school</field>
+        <field name="arch" type="xml">
+            <graph string="Participations by Courses" stacked="False">
+                <field name="course_id"/>
+                <field name="attendees_count" type="measure"/>
+            </graph>
         </field>
     </record>
 
@@ -148,7 +180,7 @@
         <field name="name">Sessions</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">session.school</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,calendar,graph</field>
     </record>
     <!-- This Menu Item must have a parent and an action -->
     <menuitem id="session_menu" name="Sessions" parent="school_menu" action="session_view_action"/>
